@@ -6,8 +6,9 @@ import '../styles/hero-section.css';
 import { Link } from "react-router-dom";
 import Category from "../components/UI/category/Category";
 import '../styles/home.css'
+import { useState, useEffect } from "react";
 
-import ProductCart from "../components/UI/product-cart/ProductCart";
+import ProductCard from "../components/UI/product-card/ProductCard";
 
 import products from '../assets/fake-data/products.js'
 
@@ -21,23 +22,23 @@ import foodCategoryImg03 from "../assets/images/bread.png";
 
 const featureData = [
     {
-      title: "Quick Delivery",
-      imgUrl: featureImg01,
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+        title: "Quick Delivery",
+        imgUrl: featureImg01,
+        desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
     },
-  
+
     {
-      title: "Super Dine In",
-      imgUrl: featureImg02,
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+        title: "Super Dine In",
+        imgUrl: featureImg02,
+        desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
     },
     {
-      title: "Easy Pick Up",
-      imgUrl: featureImg03,
-      desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
+        title: "Easy Pick Up",
+        imgUrl: featureImg03,
+        desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.",
     },
-  ];
-  
+];
+
 
 const Home = () => {
     return (
@@ -58,11 +59,11 @@ const Home = () => {
                                 <div className="hero__btns d-flex align-items-center gap-5 mt-4  ">
                                     <button className="order__btn d-flex align-items-center justify-content-between">
                                         Order Now
-                                        <i class = "ri-arrow-right-s-line"></i>
+                                        <i class="ri-arrow-right-s-line"></i>
                                     </button>
 
                                     <button className="all__foods-btn">
-                                        <Link to = '/foods'>
+                                        <Link to='/foods'>
                                             See all foods
                                         </Link>
                                     </button>
@@ -70,17 +71,17 @@ const Home = () => {
 
 
                                 </div>
-                                
+
                                 <div className="hero__service d-flex align-items-center gap-2 mt-5 ">
                                     <p className="d-flex align-items-center gap-2">
                                         <span className="shipping__icon">
-                                            <i class = "ri-car-line"></i>
+                                            <i class="ri-car-line"></i>
                                         </span>
-                                        No shipping charges 
+                                        No shipping charges
                                     </p>
                                     <p className="d-flex align-items-center gap-2">
                                         <span className="shipping__icon">
-                                            <i class = "ri-shield-check-line"></i>
+                                            <i class="ri-shield-check-line"></i>
                                         </span>
                                         100% Secure Checkout
                                     </p>
@@ -100,33 +101,33 @@ const Home = () => {
             </section>
 
             <section className="pt-0">
-                <Category/>
+                <Category />
             </section>
 
             <section>
                 <Container>
                     <Row>
-                        <Col lg = '12' className="text-center">
+                        <Col lg='12' className="text-center">
                             <h5 className="feature__subtitle mb-4">What we serve</h5>
                             <h2 className="feature__title">Just sit back at home</h2>
-                            <h2 className="feature__title"> 
-                                we will 
+                            <h2 className="feature__title">
+                                we will
                                 <span> take care</span>
                             </h2>
 
                             <p className="mb-1 mt-4 feature__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, voluptatum.</p>
-                            
+
                             <p className="feature__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, voluptatum.</p>
 
                         </Col>
 
                         {
-                            featureData.map((item, index) =>(
+                            featureData.map((item, index) => (
 
-                                <Col lg='4' d = '4' key = {index} className='mt-5'>
+                                <Col lg='4' d='4' key={index} className='mt-5'>
 
                                     <div className="feature__item text-center px-5 py-3">
-                                        <img src = {item.imgUrl} alt = "feature-img" className="w-25 mb-3"/>
+                                        <img src={item.imgUrl} alt="feature-img" className="w-25 mb-3" />
 
                                         <h5 className="fw-bold mb-3">{item.title}</h5>
                                         <p>{item.desc}</p>
@@ -146,16 +147,16 @@ const Home = () => {
             <section>
                 <Container>
                     <Row>
-                        <Col lg = '12' className="text-center">
+                        <Col lg='12' className="text-center">
                             <h2>Popular Foods</h2>
                         </Col>
 
-                        <Col lg = '12' >
+                        <Col lg='12' >
                             <div className="food__category d-flex align-items-center justify-content-center gap-4">
                                 <button className="all__btn">All</button>
-                                <button className="d-flex align-items-center gap-2"><img src = {foodCategoryImg01} alt = ''/>Burger</button>
-                                <button className="d-flex align-items-center gap-2"><img src = {foodCategoryImg02} alt = ''/>Pizza</button>
-                                <button className="d-flex align-items-center gap-2"><img src = {foodCategoryImg03} alt = ''/>Bread</button>
+                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg01} alt='' />Burger</button>
+                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg02} alt='' />Pizza</button>
+                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg03} alt='' />Bread</button>
 
                             </div>
                         </Col>
@@ -163,9 +164,9 @@ const Home = () => {
                         {
                             products.map((item, index) => (
 
-                            <Col lg = '3' md = '4' key = {item.id} className = 'mt-5'> 
-                                <ProductCart item ={item}/>
-                            </Col>
+                                <Col lg='3' md='4' key={item.id} className='mt-5'>
+                                    <ProductCard item={item} />
+                                </Col>
 
                             ))
                         }
