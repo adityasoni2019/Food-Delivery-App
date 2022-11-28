@@ -29,9 +29,27 @@ const nav__links = [
 const Header = () => {
 
     const menuRef = useRef(null);
+    // const headerRef = useRef(null);
+
+    // // ⭐⭐⭐
     const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
+    // //  ^ this is for the toggle "menu". Like, the toggle bar for smaller sized screen.
+
+    // useEffect(()=>{
+    //     window.addEventListener('scroll', ()=>{
+    //         if(document.body.scrollTop >80 || document.documentElement.scrollTop> 80){
+    //             headerRef.current.classList.add("header__shrink");
+    //         }   
+    //         else{
+    //             headerRef.current.classList.remove("header__shrink");
+    //         }
+    //     })
+
+    //     return () => window.removeEventListener('scroll');
+    // }, [])
+
     return (
-        <header className="header">
+        <header className="header" >
 
             <Container>
                 <div className="nav__wrapper d-flex align-items-center justify-content-between">
