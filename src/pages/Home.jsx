@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "../components/Helmet/Helmet";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import heroImg from '../assets/images/hero.png';
 import '../styles/hero-section.css';
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 
 import ProductCard from "../components/UI/product-card/ProductCard";
 
+import whyImg from '../assets/images/location.png' 
 import products from '../assets/fake-data/products.js'
 
 import featureImg01 from "../assets/images/service-01.png";
@@ -19,6 +20,7 @@ import featureImg03 from "../assets/images/service-03.png";
 import foodCategoryImg01 from "../assets/images/hamburger.png";
 import foodCategoryImg02 from "../assets/images/pizza.png";
 import foodCategoryImg03 from "../assets/images/bread.png";
+import produce from "immer";
 
 const featureData = [
     {
@@ -41,6 +43,30 @@ const featureData = [
 
 
 const Home = () => {
+
+    const [category, setCategory] = useState('ALL');
+    const [allProducts, setAllProducts] = useState(products);
+
+    // this is basically re-rendering stuffs, everytime the category changes. 
+    useEffect(() =>{
+            if(category === 'ALL'){
+                setAllProducts(products);
+            }
+            else if(category=== "BURGER"){
+                const filteredProducts = products.filter( item => item.category === 'Burger');
+                setAllProducts(filteredProducts);
+            }
+            else if(category=== "PIZZA"){
+                const filteredProducts = products.filter( item => item.category === 'Pizza');
+                setAllProducts(filteredProducts);
+            }
+            else if(category=== "BREAD"){
+                const filteredProducts = products.filter( item => item.category === 'Bread');
+                setAllProducts(filteredProducts);
+            }
+        }
+    , [category]);
+
     return (
         <Helmet>
             <section>
@@ -153,27 +179,55 @@ const Home = () => {
 
                         <Col lg='12' >
                             <div className="food__category d-flex align-items-center justify-content-center gap-4">
-                                <button className="all__btn">All</button>
-                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg01} alt='' />Burger</button>
-                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg02} alt='' />Pizza</button>
-                                <button className="d-flex align-items-center gap-2"><img src={foodCategoryImg03} alt='' />Bread</button>
+                                
+                                <button className={`all__btn ${category === 'ALL'? 'foodBtnActive': ""}`} onClick={() => setCategory("ALL")}>All</button>
+                                <button className={`d-flex align-items-center gap-2 ${category === 'BURGER'? 'foodBtnActive': ""}`} onClick={() => setCategory("BURGER")}><img src={foodCategoryImg01} alt='' />Burger</button>
+                                <button className={`d-flex align-items-center gap-2 ${category === 'PIZZA'? 'foodBtnActive': ""}`} onClick={() => setCategory("PIZZA")}><img src={foodCategoryImg02} alt='' />Pizza</button>
+                                <button className={`d-flex align-items-center gap-2 ${category === 'BREAD'? 'foodBtnActive': ""}`} onClick={() => setCategory("BREAD")}><img src={foodCategoryImg03} alt='' />Bread</button>
 
                             </div>
                         </Col>
 
                         {
-                            products.map((item, index) => (
-
+                            // allProducts is from the useEffect hook.
+                            allProducts.map((item, index) => (
                                 <Col lg='3' md='4' key={item.id} className='mt-5'>
                                     <ProductCard item={item} />
                                 </Col>
-
                             ))
                         }
                     </Row>
                 </Container>
             </section>
+            
+            <section>
+                <Container>
+                    <Row>
+                        <Col lg = '6' md = '6' >
+                            <img src = {whyImg} alt = "why-tasty-treat"></img>
 
+                        </Col>
+
+                        <Col lg = '6' md = '6' >
+                            <div className="why__tasty-treat">
+                                <h2 className="tasty__treat-little">Why tasty treat?</h2>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis veniam natus, nihil beatae quam fuga reiciendis. Quaerat distinctio, officiis soluta non fuga quasi! Error veritatis quaerat reprehenderit inventore illo ullam?</p>
+                            </div>
+
+                        </Col>
+                        
+                        <ListGroup>
+                            <ListGroupItem>
+                                
+                            </ListGroupItem>
+                        </ListGroup>
+
+                    </Row>
+                    
+                </Container>
+
+            </section>
+                        
         </Helmet>
     );
 };
